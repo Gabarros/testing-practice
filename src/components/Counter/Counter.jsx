@@ -21,7 +21,7 @@ const Counter = () => {
     return (
         <div>
             <h1 data-testid="header">My Counter</h1>
-            <h2 data-testid="counter">{counter}</h2>
+            <h2 data-testid="counter" className={`${counter >= 100 ? "green" : ""}${counter <= -100 ? "red" : ""}`}>{counter}</h2>
             <div>
                 <button onClick={() => handleSubtract()} data-testid="subtract-button">-</button>
                 <input data-testid="input" type="number" value={input} onChange={(e) => handleInput(e)} />
