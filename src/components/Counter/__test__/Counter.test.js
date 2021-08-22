@@ -4,15 +4,21 @@ import "@testing-library/jest-dom/extend-expect";
 
 import Counter from "../Counter";
 
+let getByTestId;
+
+beforeEach(() => {
+  const component = render(<Counter />);
+  getByTestId = component.getByTestId;
+});
+
 test("should return a header with a text", () => {
-  const { getByTestId } = render(<Counter />);
+ 
   const header = getByTestId("header");
   expect(header).toBeDefined();
   expect(header.textContent).toBe("My Counter");
 });
 
 test("should have a counter with a value zero", () => {
-  const { getByTestId } = render(<Counter />);
   const counter = getByTestId("counter");
 
   expect(counter).toBeDefined();
@@ -20,28 +26,24 @@ test("should have a counter with a value zero", () => {
 });
 
 test("should have a input with a initial value of 0", () => {
-  const { getByTestId } = render(<Counter />);
   const input = getByTestId("input");
 
   expect(input.value).toBe("1");
 });
 
 test("should render a button with +", () => {
-  const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
 
   expect(addButton.textContent).toBe("+");
 });
 
 test("should render a button with a -", () => {
-  const { getByTestId } = render(<Counter />);
   const minusButton = getByTestId("subtract-button");
 
   expect(minusButton.textContent).toBe("-");
 });
 
 test("should change the value on the input", () => {
-  const { getByTestId } = render(<Counter />);
   const input = getByTestId("input");
 
   expect(input.value).toBe("1");
@@ -56,7 +58,6 @@ test("should change the value on the input", () => {
 });
 
 test("should add 1 to the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
   const counter = getByTestId("counter");
 
@@ -66,7 +67,6 @@ test("should add 1 to the counter", () => {
 });
 
 test("should remove 1 from the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const subtractButton = getByTestId("subtract-button");
   const counter = getByTestId("counter");
 
@@ -76,7 +76,6 @@ test("should remove 1 from the counter", () => {
 });
 
 test("should increase the counter by 2 after change the input to 2 ", () => {
-  const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
   const input = getByTestId("input");
   const counter = getByTestId("counter");
@@ -92,7 +91,6 @@ test("should increase the counter by 2 after change the input to 2 ", () => {
 });
 
 test("should decrease the counter by 2 after change the input to 2 and click the subtract button ", () => {
-  const { getByTestId } = render(<Counter />);
   const subtractButton = getByTestId("subtract-button");
   const input = getByTestId("input");
   const counter = getByTestId("counter");
@@ -108,7 +106,6 @@ test("should decrease the counter by 2 after change the input to 2 and click the
 });
 
 test("should have the right value after add and subtract buttons click ", () => {
-  const { getByTestId } = render(<Counter />);
   const subtractButton = getByTestId("subtract-button");
   const addButton = getByTestId("add-button");
   const input = getByTestId("input");
@@ -126,7 +123,6 @@ test("should have the right value after add and subtract buttons click ", () => 
 });
 
 test('should find the right color in the counter element', () => {
-  const { getByTestId } = render(<Counter />);
   const counter = getByTestId("counter");
   const input = getByTestId("input");
   const addButton = getByTestId("add-button");
@@ -139,7 +135,6 @@ test('should find the right color in the counter element', () => {
       value: "50",
     },
   });
-
   fireEvent.click(addButton);
   fireEvent.click(addButton);
   expect(counter.className).toBe("green");
@@ -152,7 +147,5 @@ test('should find the right color in the counter element', () => {
   fireEvent.click(addButton);
   fireEvent.click(addButton);
   expect(counter.className).toBe("");
-
-  
 });
 
